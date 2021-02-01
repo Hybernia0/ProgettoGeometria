@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta charset="UTF-8">
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <link href="http://fonts.googleapis.com/css?family=Didact+Gothic" rel="stylesheet" />
+    <link href="default.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="fonts.css" rel="stylesheet" type="text/css" media="all" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Unity WebGL Player | ProgettoGeomComp</title>
+    <link rel="shortcut icon" href="TemplateData/favicon.ico">
+    <link rel="stylesheet" href="TemplateData/style.css">
+    <script src="TemplateData/UnityProgress.js"></script>
+    <script src="Build/UnityLoader.js"></script>
+    <script>
+      var unityInstance = UnityLoader.instantiate("unityContainer", "Build/GiocoSito.json", {onProgress: UnityProgress});
+    </script>
+  </head>
+  <body>
+    <div id="header-wrapper">
+      <div id="header" class="container">
+        <div id="logo">
+          <h1><a href="#">Marta Sartore</a></h1>
+        </div>
+        <div id="menu">
+          <ul>
+            <li><a href="index.html" accesskey="1" title="">Homepage</a></li>
+            <li><a href="Teoria.html" accesskey="2" title="">Teoria</a></li>
+            <li><a href="Manuale-Utente.html" accesskey="3" title="">Manuale Utente</a></li>
+            <li class="active"><a href="App.html" accesskey="4" title="">Gioco</a></li>
+          </ul>
+        </div>
+      </div>
+      <div id="banner" class="container">
+        <div class="title">
+          <h2>Gioco</h2>
+        </div>
+      </div>
+    </div>
+    <div id="wrapper">
+      <div id="three-column" class="container">
+        <div class="webgl-content">
+          <div id="unityContainer" style="width: 960px; height: 600px"></div>
+          <div class="footer">
+            <div class="webgl-logo"></div>
+            <div class="fullscreen" onclick="unityInstance.SetFullscreen(1)"></div>
+            <div class="title">Progetto Geometria</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

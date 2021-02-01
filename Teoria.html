@@ -1,0 +1,226 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta charset="UTF-8">
+<title></title>
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+<link href="http://fonts.googleapis.com/css?family=Didact+Gothic" rel="stylesheet" />
+<link href="default.css" rel="stylesheet" type="text/css" media="all" />
+<link href="fonts.css" rel="stylesheet" type="text/css" media="all" />
+
+<!--[if IE 6]><link href="default_ie6.css" rel="stylesheet" type="text/css" /><![endif]-->
+</head>
+<body>
+<div id="header-wrapper">
+	<div id="header" class="container">
+		<div id="logo">
+			<h1><a href="#">Marta Sartore</a></h1>
+		</div>
+		<div id="menu">
+			<ul>
+				<li><a href="index.html" accesskey="1" title="">Homepage</a></li>
+				<li class= "active"><a href="Teoria.html" accesskey="2" title="">Teoria</a></li>
+				<li><a href="Manuale-Utente.html" accesskey="3" title="">Manuale Utente</a></li>
+				<li><a href="App.html" accesskey="4" title="">Gioco</a></li>
+			</ul>
+		</div>
+	</div>
+	<div id="banner" class="container">
+		<div class="title">
+			<h2>Teoria</h2>
+		</div>
+	</div>
+</div>
+<div id="wrapper">
+	<div id="three-column" class="container">
+		<h2>Introduzione</h2>
+		<span class="byline">
+			<p>In questo progetto sono state impiegate le curve Spline per realizzare la traiettoria dei movimenti di due dei principali ostacoli del gioco: 
+				i draghi e le sfere di magia. Per la diversa natura dei due pericoli sono state usate due tipologie di Spline diverse: 
+				la prima, usata per le sfere di magia, viene generata in modo casuale durante la sessione di gioco e presenta un unico incollamento 
+				di tipo C1 di curve di Bezièr di grado 3, la seconda invece è stata generata in fase di costruzione della scena, è fissa e presenta tre 
+				incollamenti di tipo C1 dello stesso tipo di curve di Bezièr citato prima.
+			</p>
+		</span>
+
+		<h2>Curve di Bèzier</h2>
+				<p>Una curva di Bezièr è un particolare tipo di curva differenziale che viene definita mediante un poligono di controllo di k+1 punti in un
+				intervallo [0,1]. Il metodo utilizzato in questo progetto per generare queste curve è un algoritmo ricorsivo chiamato Algoritmo di De Casteljau. 
+				Il grado della curva viene è determinato dal numero dei vertici del poligono di controllo – 1, in particolare in questo progetto sono state 
+				utilizzate solamente curve di grado 3 e quindi il poligono di controllo è formato da 4 punti.					
+				</p>
+
+				<p><b>Algoritmo di De Casteljau</b></p>
+				<p>L’algoritmo è definito in questo modo:<p><br></p>
+					Grado 1:
+					Se la curva è di grado 1 essa è detta lineare, viene generata a partire da due punti P0 e P1 e definita da un parametro t 
+					compreso nell’intervallo [0,1]. Seguendo l’algoritmo di De Casteljau un qualsiasi punto P(t) compreso tra i due punti sarà 
+					dato da:
+					<p><br></p>
+
+					<span class="image-centered">
+						<img src="images/Grado1.PNG" style="width:600px;height:210px;">
+					</span>
+				</p>
+				<p><br></p>
+				<p>Se la curva è di grado 2 avremo invece 3 vertici a formare il poligono di controllo: P0, P1 e P2. Per realizzare in questo caso la curva si 
+				parametrizzano i segmenti P0P1 e P1P2, individuando due curve ausiliarie di grado 1. I punti ottenuti al passo precedente consentono di determinare un
+				nuovo segmento e tramite sostituzione otteniamo:
+				<p><br></p>
+
+				<span class="image-centered">
+					<img src="images/Grado2.PNG" style="width:600px;height:310px;">
+				</span>
+				</p>
+				<p><br></p>
+				<p>Nel caso infine delle curve di grado 3 il discorso precedente si amplia introducendo un altro punto a formare il poligono di controllo ottenendo
+					 così infine una curva definita dalla seguente formula:
+					 <p><br></p>
+
+					<span class="image-centered">
+						<img src="images/Grado3.PNG" style="width:580px;height:410px;">
+					</span>					
+				</p>
+				<p>Questo meccanismo ricorsivo si ripete per ogni t nell’intervallo [0,1].</p>
+			<h2>Curve Spline</h2>
+			<span class="byline">
+				<p>Le curve Spline nascono con l’intento di semplificare la gestione di curve grandi e complesse, infatti avremmo potuto costruire una curva di Bezièr
+					 di grado molto elevato con l’algoritmo sopra citato ma sarebbe stato difficile dargli una forma più articolata e la creazione sarebbe diventata molto dispendiosa dal punto di vista computazionale.
+					Una curva Spline, detta anche curva polinomiale a tratti, viene generata dall’incollamento di curve polinomiali. Esse vengono definite su una
+					 collezione di intervalli u0,…,ui , nel nostro caso ogni intervallo avrà lunghezza 1 quindi la Spline generata sarà uniforme, ogni ui è detto nodo 
+					 della Spline.
+					 In ogni punto di saldatura, ovvero il punto in cui vengono incollate due curve, valgono delle condizioni di incollamento che possono essere di 
+					 diverso tipo in base alla soluzione che si vuole ottenere:					
+				</p>
+			</span>
+			<p><br></p>
+			<p>
+				Incollamento C0:
+				<p><br></p>
+				- Richiede che il punto finale di una curva che compone la Spline e il primo della curva
+				successiva coincidano.
+				<p><br></p>
+				Incollamento C1:
+				<p><br></p>
+				-Richiede l'incollamento di tipo C0 ed inoltre che i polinomi delle due curve adiacenti abbiano la stessa derivata prima nel punto di saldatura. Per ottenere ciò si possono mettere il penultimo punto della curva, il punto di giuntura e il successivo
+				nella stessa retta.		
+				<p><br></p>
+				Incollamento C2:
+				<p><br></p>
+				- Richiede la condizione C1 ed inoltre necessita  che i due polinomi abbiano anche la derivata seconda uguale nel punto di saldatura, avendo così stessa tangente e curvatura in quel punto.
+			</p>
+
+			Nel nostro caso è stato scelto un incollamento C1 ed essendo la spline uniforme il punto di giuntura di troverà ad occupare la posizione di punto medio
+			del segmento che si forma congiungendo il punto precedente a quello di giuntura e il successivo.
+		</div>
+	</div>
+</div>
+
+
+<div id="wrapper">
+	<div id="three-column" class="container">
+			<h2>Sviluppo e scelte implementative</h2>
+			<h2>B-Spline uniforme chiusa</h2>
+			<span class="byline">
+				<p><br></p>
+				<p>Questa prima tipologia di Spline viene utilizzata per delineare il movimento 
+					dei draghi. Nel gioco sono presenti 5 curve di questa tipologia ma 
+					con forme diverse, ognuna di esse è creata dall’incollamento di 4 
+					curve di Bèzier e quindi il poligono di controllo sarà formato da 13 punti (con il primo e ultimo punto che però coincidono visto che la curva è chiusa). 
+				</p>
+			</span>
+			<span class="image-centered">
+				<img src="images/SplineIngame.PNG" style="width:600px;height:410px;">
+			</span>	
+			<p>N.B: le spline non sono visibili durante la sessione di gioco ma solo in modalità creazione, altrimenti 
+				sarebbe troppo semplice identificare i movimenti degli ostacoli.</p>
+			<p><br></p>
+			<p>
+				Tramite la modalità scena è possibile spostare i punti del poligono di controllo facendo così assumere alla curva la forma desiderata,
+				 le curve vengono realizzate mediante l’algoritmo di De Casteljau. E’ stato scelto un numero così elevato di punti per poter creare curve molto ampie e
+				  complesse, che riuscissero quindi ad evitare alcuni ostacoli presenti nel gioco mantenendo coerenza nella traiettoria. Gli incollamenti soddisfano la condizione
+				   C1, è stata scelta questa condizione per fare in modo che il punto di raccordo fosse dolce per poter così rendere anche il movimento dei draghi che seguono la curva 
+				   più realistico. Tale condizione viene verificata nella funzione EnforceMode() che controlla, ogni qual volta viene spostato un punto in cui è avvenuto un incollamento, 
+				   che la condizione venga rispettata. Nel caso delle curve B- Spline uniformi la condizione di incollamento C1 vuole non solo che i tre punti (prima del punto di incollamento, punto centrale, dopo il punto di incollamento) siano allineati, ma anche che il punto centrale sia il punto medio del segmento che collega i due punti restanti.  
+			</p>
+
+			<span class="image-centered">
+				<img src="images/Enforcetangent.PNG" style="width:400px;height:610px;">
+			</span>	
+			
+
+			<p>Per creare una maggiore variabilità di gioco verranno attivate randomicamente solo alcune delle spline 5, in modo tale da avere una esperienza di gioco più avvincente. Nella modalità Easy 
+				sarà attivata solo una delle 5, in modalità medium 3 su 5, in modalità difficile tutte e 5 mentre in modalità random il numero sarà casuale.</p>
+		</div>
+
+	<div id="three-column" class="container">
+		<h2>B-Spline uniforme aperta</h2>
+		<span class="byline">
+			<p>Il secondo tipo di B-Spline uniforme ha delle caratteristiche in comune con il primo ma viene generata in
+				 modo diverso. Presenta un solo incollamento di tipo C1, il poligono di controllo è formato quindi da soli 7 punti che però sono randomici. Questo tipo di Spline
+				viene utilizzato per definire la traiettoria delle magie che vengono scagliate da delle streghe nella parte sinistra del ponte. In totale ci sono due Spline di questo tipo nel gioco.
+			</p>
+		</span>
+
+		<span class="image-centered">
+			<img src="images/SplineMagic.PNG" style="width:600px;height:410px;">
+		</span>	
+		<p>N.B: le spline non sono visibili durante la sessione di gioco ma solo in modalità creazione, altrimenti 
+			sarebbe troppo semplice identificare i movimenti degli ostacoli.</p>
+		
+		<p>
+			Il primo punto della curva è posizionato dove è presente la strega, altri 5 punti sono casuali ma possono capitare solamente
+			nella parte sinistra del ponte senza superarlo e senza uscire dall’area di gioco. L’ultimo punto sarà anch’esso casuale ma obbligatoriamente dovrà finire
+			nel ponte e in un punto tra la posizione attuale del giocatore e la fine del ponte. E’ stato scelto di rendere queste Spline più piccole perché non erano richieste
+			forme complesse e di rendere la generazione casuale per dare più variabilità al gioco. Ogni qual volta una magia percorre tutta la traiettoria formata dalla Spline viene invocata 
+			la ShufflePoints() che crea una nuova Spline mantenendo i vincoli prima citati e viene generata una nuova magia.
+		</p>
+
+		<span class="image-centered">
+			<img src="images/Shufflepoints.PNG" style="width:690px;height:290px;">
+		</span>	
+	</div>
+</div>
+
+		
+<div id="copyright" class="container">
+	<p>Università di Milano | Anno Accademico 2019/2020</p>
+</div>
+</body>
+</html>
+
+		<!--
+		<div class="boxA">
+			<span class="fa fa-gamepad"></span>
+			<p>Praesent pellentesque facilisis elit. Class aptent taciti sociosqu ad  torquent per conubia nostra.</p>
+			<a href="#" class="button button-alt">More Info</a>
+		</div>
+		<div class="boxB">
+			<span class="fa fa-cogs"></span>
+			<p>Etiam neque. Vivamus consequat lorem at nisl. Nullam  wisi a sem semper eleifend. Donec mattis.</p>
+			<a href="#" class="button button-alt">More Info</a>
+		</div>
+		<div class="boxC">
+			<span class="fa fa-book"></span>
+			<p> Aenean lectus lorem, imperdiet at, ultrices eget, ornare et, wisi. Pellentesque adipiscing purus.</p>
+			<a href="#" class="button button-alt">More Info</a>
+		</div>
+	</div>
+</div>
+
+<div id="welcome">
+	<div class="container">
+		<div class="title">
+			<h2>Fusce ultrices fringilla metus</h2>
+			<span class="byline">Donec leo, vivamus fermentum nibh in augue praesent a lacus at urna congue</span>
+		</div>
+		<p>This is <strong>StoneWork</strong>, a free, fully standards-compliant CSS template designed by <a href="http://templated.co" rel="nofollow">TEMPLATED</a>. The photos in this template are from <a href="http://fotogrph.com/"> Fotogrph</a>. This free template is released under the <a href="http://templated.co/license">Creative Commons Attribution</a> license, so you're pretty much free to do whatever you want with it (even use it commercially) provided you give us credit for it. Have fun :) </p>
+		<ul class="actions">
+			<li><a href="#" class="button">Etiam posuere</a></li>
+		</ul>
+	</div>
+</div>-->
+
