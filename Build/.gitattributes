@@ -1,0 +1,6 @@
+Build/ filter=lfs diff=lfs merge=lfs -text
+GiocoSito.wasm.framework.unityweb filter=lfs diff=lfs merge=lfs -text
+GiocoSito.data.unityweb filter=lfs diff=lfs merge=lfs -text
+GiocoSito.wasm.code.unityweb filter=lfs diff=lfs merge=lfs -text
+.zip filter=lfs diff=lfs merge=lfs -text
+.gzip filter=lfs diff=lfs merge=lfs -text
