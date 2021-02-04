@@ -105,16 +105,13 @@
 				<p><br></p>
 				Incollamento C1:
 				<p><br></p>
-				-Richiede l'incollamento di tipo C0 ed inoltre che i polinomi delle due curve adiacenti abbiano la stessa derivata prima nel punto di saldatura. Per ottenere ciò si possono mettere il penultimo punto della curva, il punto di giuntura e il successivo
-				nella stessa retta.		
+				-Richiede l'incollamento di tipo C0 ed inoltre che i polinomi delle due curve adiacenti abbiano la stessa derivata prima nel punto di saldatura. Per ottenere ciò in termini pratici si devono mettere il penultimo punto della curva, il punto di giuntura e il successivo
+				nella stessa retta.	Nel caso di spline uniforme il punto di giuntura di troverà ad occupare la posizione di punto medio del segmento che si forma congiungendo il punto precedente a quello di giuntura e il successivo.
 				<p><br></p>
 				Incollamento C2:
 				<p><br></p>
 				- Richiede la condizione C1 ed inoltre necessita  che i due polinomi abbiano anche la derivata seconda uguale nel punto di saldatura, avendo così stessa tangente e curvatura in quel punto.
 			</p>
-
-			Nel nostro caso è stato scelto un incollamento C1 ed essendo la spline uniforme il punto di giuntura di troverà ad occupare la posizione di punto medio
-			del segmento che si forma congiungendo il punto precedente a quello di giuntura e il successivo.
 		</div>
 	</div>
 </div>
@@ -143,7 +140,7 @@
 				 le curve vengono realizzate mediante l’algoritmo di De Casteljau. E’ stato scelto un numero così elevato di punti per poter creare curve molto ampie e
 				  complesse, che riuscissero quindi ad evitare alcuni ostacoli presenti nel gioco mantenendo coerenza nella traiettoria. Gli incollamenti soddisfano la condizione
 				   C1, è stata scelta questa condizione per fare in modo che il punto di raccordo fosse dolce per poter così rendere anche il movimento dei draghi che seguono la curva 
-				   più realistico. Tale condizione viene verificata nella funzione EnforceMode() che controlla, ogni qual volta viene spostato un punto in cui è avvenuto un incollamento, 
+				   più realistico. Tale condizione viene verificata nella funzione EnforceMode che controlla, ogni qual volta viene spostato un punto in cui è avvenuto un incollamento, 
 				   che la condizione venga rispettata. Nel caso delle curve B- Spline uniformi la condizione di incollamento C1 vuole non solo che i tre punti (prima del punto di incollamento, punto centrale, dopo il punto di incollamento) siano allineati, ma anche che il punto centrale sia il punto medio del segmento che collega i due punti restanti.  
 			</p>
 
@@ -152,7 +149,7 @@
 			</span>	
 			
 
-			<p>Per creare una maggiore variabilità di gioco verranno attivate randomicamente solo alcune delle spline 5, in modo tale da avere una esperienza di gioco più avvincente. Nella modalità Easy 
+			<p>Per creare una maggiore variabilità di gioco verranno attivate casualmente solo alcune delle spline 5, in modo tale da avere una esperienza di gioco più avvincente. Nella modalità Easy 
 				sarà attivata solo una delle 5, in modalità medium 3 su 5, in modalità difficile tutte e 5 mentre in modalità random il numero sarà casuale.</p>
 		</div>
 
@@ -160,7 +157,7 @@
 		<h2>B-Spline uniforme aperta</h2>
 		<span class="byline">
 			<p>Il secondo tipo di B-Spline uniforme ha delle caratteristiche in comune con il primo ma viene generata in
-				 modo diverso. Presenta un solo incollamento di tipo C1, il poligono di controllo è formato quindi da soli 7 punti che però sono randomici. Questo tipo di Spline
+				 modo diverso. Presenta un solo incollamento di tipo C1, il poligono di controllo è formato quindi da soli 7 punti che però sono casuali. Questo tipo di Spline
 				viene utilizzato per definire la traiettoria delle magie che vengono scagliate da delle streghe nella parte sinistra del ponte. In totale ci sono due Spline di questo tipo nel gioco.
 			</p>
 		</span>
@@ -176,7 +173,7 @@
 			nella parte sinistra del ponte senza superarlo e senza uscire dall’area di gioco. L’ultimo punto sarà anch’esso casuale ma obbligatoriamente dovrà finire
 			nel ponte e in un punto tra la posizione attuale del giocatore e la fine del ponte. E’ stato scelto di rendere queste Spline più piccole perché non erano richieste
 			forme complesse e di rendere la generazione casuale per dare più variabilità al gioco. Ogni qual volta una magia percorre tutta la traiettoria formata dalla Spline viene invocata 
-			la ShufflePoints() che crea una nuova Spline mantenendo i vincoli prima citati e viene generata una nuova magia.
+			la ShufflePoints che crea una nuova Spline mantenendo i vincoli prima citati e viene generata una nuova magia.
 		</p>
 
 		<span class="image-centered">
