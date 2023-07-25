@@ -9,7 +9,7 @@ In questo progetto sono state impiegate delle curve spline chiuse e fisse per de
 # Introduzione
 In questo progetto sono state impiegate le curve Spline per realizzare la traiettoria dei movimenti di due dei principali ostacoli del gioco: i draghi e le sfere di magia. Per la diversa natura dei due pericoli sono state usate due tipologie di Spline diverse: la prima, usata per le sfere di magia, viene generata in modo casuale durante la sessione di gioco e presenta un unico incollamento di tipo C1 di curve di Bezièr di grado 3, la seconda invece è stata generata in fase di costruzione della scena, è fissa e presenta tre incollamenti di tipo C1 dello stesso tipo di curve di Bezièr citato prima.
 
-#Curve di Bèzier
+# Curve di Bèzier
 Una curva di Bezièr è un particolare tipo di curva differenziale che viene definita mediante un poligono di controllo di k+1 punti in un intervallo [0,1]. Il metodo utilizzato in questo progetto per generare queste curve è un algoritmo ricorsivo chiamato Algoritmo di De Casteljau. Il grado della curva viene è determinato dal numero dei vertici del poligono di controllo – 1, in particolare in questo progetto sono state utilizzate solamente curve di grado 3 e quindi il poligono di controllo è formato da 4 punti.
 
 # Algoritmo di De Casteljau
